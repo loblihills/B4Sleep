@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="stopwatch-mode">
+<head lang="en">
+    <script>
+	    screen.lockOrientation("landscape-primary");
+    </script>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Material Design Stopwatch, Alarm and Timer</title>
+
+    <link type="text/css" rel="stylesheet" href="assets/materialize/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
+	<link type="text/css" rel="stylesheet" href="assets/jonthornton-jquery-timepicker/jquery.timepicker.css">
+
+</head>
+<body>
+		<div class="container stopwatch">
+			<form>
+				<a id="stopwatch-btn-start" class="waves-effect waves-teal btn-flat">Start</a>
+				<a id="stopwatch-btn-pause" class="waves-effect waves-teal btn-flat">Pause</a>
+				<a id="stopwatch-btn-reset" class="waves-effect waves-teal btn-flat">Reset</a>
+			</form>
+
+			<div class="clock inactive z-depth-1">
+				<span>0:00:00.0</span>
+				<div class="overlay waves-effect"></div>
+			</div>
+		</div>
+
+
+	<div id="times-up-modal" class="modal">
+		<div class="modal-content">
+			<h3>Time's Up!</h3>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="dismiss-alarm-sounds modal-action waves-effect waves-red btn-flat">Dismiss Alarm</a>
+		</div>
+	</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="assets/materialize/js/materialize.min.js"></script>
+<script src="assets/jonthornton-jquery-timepicker/jquery.timepicker.min.js"></script>
+<script src="assets/js/hammer.js"></script>
+<script src="assets/js/stopwatch.js"></script>
+
+</body>
+</html>

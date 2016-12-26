@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grid View App template</title>
+    
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0;" />
+        <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+    
+    <script>  
+    	 screen.lockOrientation("portrait-primary");
+        $.ui.autoLaunch = false; 
+        $.ui.backButtonText = "Back";
+                
+        $(document).ready(function(){
+            $.ui.launch();
+        });
+    </script>
+    <style>
+/* CSS responsive square grid */        
+.grid-photo {margin:3px -7px;} 
+.grid-photo:after {content:'';display:block;clear:both;}        
+.grid-photo li {position: relative; display:block; float:left; width: 10%; padding-bottom: 10%;}
+.grid-photo .grid-photo-box {position: absolute;left: 3px;right: 3px;top: 3px;bottom: 3px; background-color: rgba(128,128,128,0.2);} 
+.grid-photo img {width:100%;height:100%}
+@media only screen and (max-width : 1024px) {
+    .grid-photo li {width: 20%; padding-bottom: 20%;}        
+}        
+@media only screen and (max-width : 768px) {
+    .grid-photo li {width: 25%; padding-bottom: 25%;}        
+}        
+@media only screen and (max-width : 480px) {
+    .grid-photo li {width: 30%; padding-bottom: 30%;}        
+}
+@media only screen and (max-width : 320px) {
+    .grid-photo li {width: 36%; padding-bottom: 36%;}        
+}   
+    </style>    
+</head>
+<body> 
+<div id="afui">
+    <div id="content" style="">
+        
+    <!--Grid View Page-->
+        <div class="panel" title="Title" id="gridview" selected="true">
+            <header>
+                <h1>B4Sleep</h1>
+                <a href="#" class="button icon refresh" style="float:right"></a>
+            </header>
+            <div class="grid-photo">
+                <li><div class="grid-photo-box"><a href="components/stretch/stretch.html"><img src="images/str.png" /></a></div></li>
+                <li><div class="grid-photo-box"><a href="components/alarm2/index.html"><img src="images/alarm.png" /></a></div></li>
+                <li><div class="grid-photo-box"><a href="components/weather/index.html"><img src="images/weather.png" /></a></div></li>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+             <div class="grid-photo">
+             	<h5>Developing</h5>
+                <li><div class="grid-photo-box"><a href="components/alarm/stopwatch.html"><img src="images/stopwatch.png" /></a></div></li>
+                <li><div class="grid-photo-box"><a href="components/alarm/timer.html"><img src="images/timer.png" /></a></div></li>
+                <li><div class="grid-photo-box"><a href="components/alarm/alarm.html"><img src="images/alarm.png" /></a></div></li>
+                
+            </div>
+        </div>
+        
+    </div>
+</div>
+</body>
+</html>

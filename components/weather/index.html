@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grid View App template</title>
+    
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0;" />
+        <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+
+    <script>     
+    window.addEventListener('tizenhwkey', function onTizenHwKey(e) {
+        if (e.keyName === 'back') {
+                window.history.back();
+        }
+    });
+	    screen.lockOrientation("landscape-secondary");
+        $.ui.autoLaunch = false; 
+        $.ui.backButtonText = "Back";
+                
+        $(document).ready(function(){
+            $.ui.launch();
+        });
+    </script>
+    <style>
+/* CSS responsive square grid */        
+.grid-photo {margin:3px -7px;} 
+.grid-photo:after {content:'';display:block;clear:both;}        
+.grid-photo li {position: relative; display:block; float:left; width: 10%; padding-bottom: 10%;}
+.grid-photo .grid-photo-box {position: absolute;left: 3px;right: 3px;top: 3px;bottom: 3px; background-color: rgba(128,128,128,0.2);} 
+.grid-photo img {width:100%;height:100%}
+@media only screen and (max-width : 1024px) {
+    .grid-photo li {width: 20%; padding-bottom: 20%;}        
+}        
+@media only screen and (max-width : 768px) {
+    .grid-photo li {width: 25%; padding-bottom: 25%;}        
+}        
+@media only screen and (max-width : 480px) {
+    .grid-photo li {width: 30%; padding-bottom: 30%;}        
+}
+@media only screen and (max-width : 320px) {
+    .grid-photo li {width: 36%; padding-bottom: 36%;}        
+}   
+    </style>    
+</head>
+<body> 
+<script src='http://openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script><div id='openweathermap-widget'></div>
+                    <script type='text/javascript'>
+                    window.myWidgetParam = {
+                        id: 31,
+                        cityid: 1835848,
+                        appid: 'a2954f5a870b05b0c50e14e54b141ef2',
+                        containerid: 'openweathermap-widget',
+                    };
+                    (function() {
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                        script.async = true;
+                        script.src = 'http://openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js';
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(script, s);
+                    })();
+                  </script>
+</body>
+</html>

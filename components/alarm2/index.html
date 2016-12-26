@@ -1,0 +1,511 @@
+<html>
+
+<head>
+	<title>
+		Alarm Clock
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, height=device-height">
+	<script>
+
+    window.addEventListener('tizenhwkey', function onTizenHwKey(e) {
+        if (e.keyName === 'back') {
+                window.history.back();
+        }
+    });
+</script>
+</head>
+
+<!--Initialising css folders-->
+<link rel="stylesheet" href="css/materialize.min.css">
+
+<!--Initialising javascript folders-->
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.min.js"></script>
+
+
+<!--Initialising icon font-->
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+.circleBase {
+    border-radius: 50%;
+}
+
+.type1 {
+	margin: auto;
+    width: 220px;
+    height: 220px;
+    border: 3px solid white;
+}
+</style>
+
+<script>
+var tone = new Audio('tone.mp3');
+var h;
+var m;
+var s;
+var c=1;
+function time(){
+var hour=f1.hours.value;
+var minute=f1.minutes.value;
+var mer=f1.meridian.value;
+var sec=0;
+
+var date= new Date();
+var curhour=date.getHours();
+var curmin=date.getMinutes();
+var cursec=date.getSeconds();
+var remhour;
+var remmin;
+var remsec;
+
+if(mer=="pm")
+	hour=hour+12;
+
+if(mer=="am" && hour==12)
+	hour=0;
+	
+if(hour<curhour)
+	remhour=24-(curhour-hour);
+else
+	remhour=hour-curhour
+	
+if(minute<curmin)
+	remmin=60-(curmin-minute);
+else
+	remmin=minute-curmin
+	
+if(sec<cursec)
+	remsec=60-(cursec-sec);
+else
+	remsec=sec-cursec
+
+if(remhour<10)
+	remhour="0"+remhour;
+if(remmin<10)
+	remmin="0"+remmin;
+if(remsec<10)
+	remsec="0"+remsec;
+
+	document.getElementById("h").innerHTML=remhour;
+	document.getElementById("m").innerHTML=remmin;
+	document.getElementById("s").innerHTML=remsec;
+
+	
+if(remhour=="00"&&remmin=="00"&&remsec=="01")
+	{
+	tone.loop=true;
+	tone.play();
+	alert("It's Time!!");
+	Alarmstop();
+	document.getElementById("s").innerHTML="00";
+	}
+else
+	setTimeout("time()",1000);
+	
+}
+
+function Alarmstop(){
+	tone.pause();
+	$('#alarmnote').modal('close');
+}
+
+function input(){
+h=f2.hours.value;
+m=f2.minutes.value;
+s=f2.sec.value;
+}
+
+function timer(){
+if(c==1)
+	{input();
+	c--;
+	}
+	
+	if(h<10)
+	document.getElementById("h2").innerHTML="0"+h;
+	else
+	document.getElementById("h2").innerHTML=h;
+	if(m<10)
+	document.getElementById("m2").innerHTML="0"+m;
+	else
+	document.getElementById("m2").innerHTML=m;
+	if(s<10)
+	document.getElementById("s2").innerHTML="0"+s;
+	else
+	document.getElementById("s2").innerHTML=s;
+	
+	
+	if(h!=0)
+	h--;
+	if(m!=0)
+	m--;
+	if(s!=0)
+	s--;
+
+	
+if(h==0&&m==0&&s==0)
+	{
+	tone.loop=true;
+	tone.play();
+	alert("Time's Up!!");
+	Alarmstop();
+	document.getElementById("s2").innerHTML="00";
+	c=1;
+	}
+else
+	setTimeout("timer()",1000);
+	
+}
+
+function timestamp(){
+var date= new Date();
+var hr=date.getHours();
+var mn=date.getMinutes();
+var sc=date.getSeconds();
+
+	if(hr<10)
+	document.getElementById("h4").innerHTML="0"+hr;
+	else
+	document.getElementById("h4").innerHTML=hr;
+	if(mn<10)
+	document.getElementById("m4").innerHTML="0"+mn;
+	else
+	document.getElementById("m4").innerHTML=mn;
+	if(sc<10)
+	document.getElementById("s4").innerHTML="0"+sc;
+	else
+	document.getElementById("s4").innerHTML=sc;
+	
+	setTimeout("timestamp()",1000);
+}
+</script>
+
+<body class="grey darken-4">
+<audio id="tone" src="tone.mp3"></audio>
+<div class="row">
+<div class="col s12">
+<ul class="tabs" style="margin-top:20">
+<li class="tab col s4 grey darken-4"><a href="#alarm"><i class="white-text material-icons">alarm</i></a></li>
+<li class="tab col s4 grey darken-4"><a href="#timer"><i class="white-text material-icons">timer</i></a></li>
+<li class="tab col s4 grey darken-4"><a href="#timestamp" onclick="timestamp()"><i class="white-text material-icons">clock</i></a></li>
+</ul>
+</div>
+
+<div class="col s12" id="alarm">
+<div  style="margin-top:40px">
+<form name="f1">
+  <div class="input-field col s4 white-text">
+    <select name="hours">
+      <option value="1" selected>01</option>
+      <option value="2">02</option>
+      <option value="3">03</option>
+      <option value="4">04</option>
+      <option value="5">05</option>
+      <option value="6">06</option>
+      <option value="7">07</option>
+      <option value="8">08</option>
+      <option value="9">09</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+    <label>Hours</label>
+  </div>
+  
+    <div class="input-field col s4 white-text">
+    <select name="minutes">
+	  <option value="0" selected>00</option>
+	  <option value="1">01</option>
+      <option value="2">02</option>
+      <option value="3">03</option>
+      <option value="4">04</option>
+      <option value="5">05</option>
+      <option value="6">06</option>
+      <option value="7">07</option>
+      <option value="8">08</option>
+      <option value="9">09</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+	  <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>      
+	  <option value="23">23</option>
+      <option value="24">24</option>
+      <option value="25">25</option>
+      <option value="26">26</option>
+      <option value="27">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+      <option value="31">31</option>
+      <option value="32">32</option>
+	  <option value="33">33</option>
+      <option value="34">34</option>
+      <option value="35">35</option>
+      <option value="36">36</option>
+      <option value="37">37</option>
+      <option value="38">38</option>
+      <option value="39">39</option>
+      <option value="40">40</option>
+      <option value="41">41</option>
+      <option value="42">42</option>      
+	  <option value="43">43</option>
+      <option value="44">44</option>
+      <option value="45">45</option>
+      <option value="46">46</option>
+      <option value="47">47</option>
+      <option value="48">48</option>
+      <option value="49">49</option>
+      <option value="50">50</option>
+      <option value="51">51</option>
+      <option value="52">52</option>      
+	  <option value="53">53</option>
+      <option value="54">54</option>
+      <option value="55">55</option>
+      <option value="56">56</option>
+      <option value="57">57</option>
+      <option value="58">58</option>
+      <option value="59">59</option>
+    </select>
+    <label>Minutes</label>
+  </div>
+  
+  <div class="input-field col s4 white-text">
+    <select name="meridian">
+      <option value="am" selected>am</option>
+      <option value="pm">pm</option>
+    </select>
+    <label>Meridiem</label>
+  </div>
+  </form>
+  </div>
+  
+	<div class="row">
+		<button class="btn large col s4 offset-s4 black" onclick="time();">Set Alarm
+		</button>
+	</div>
+  
+    <h3 class="white-text" align="center">Time Left</h3>
+	
+	<div class="circleBase type1 grey darken-3" style="margin-top: 40px;">
+		<div class="white-text row" style="margin-top:55px">
+			<h3 class="col s3" id="h">00</h3>
+			<h3 class="col s1">:</h3>
+			<h3 class="col s3" id="m">00</h3>
+			<h3 class="col s1">:</h3>
+			<h3 class="col s3" id="s">00</h3>
+		</div>
+	</div>
+</div>
+
+<div class="col s12" id="timer">
+
+	<div  style="margin-top:40px">
+	<form name="f2">
+	  <div class="input-field col s4 white-text">
+		<select name="hours">
+          <option value="0" selected>00</option>
+		  <option value="1">01</option>
+		  <option value="2">02</option>
+		  <option value="3">03</option>
+		  <option value="4">04</option>
+		  <option value="5">05</option>
+		  <option value="6">06</option>
+		  <option value="7">07</option>
+		  <option value="8">08</option>
+		  <option value="9">09</option>
+		  <option value="10">10</option>
+		  <option value="11">11</option>
+		  <option value="12">12</option>
+		</select>
+		<label>Hours</label>
+	  </div>
+	  
+		<div class="input-field col s4 white-text">
+		<select name="minutes">
+          <option value="0" selected>00</option>
+		  <option value="1">01</option>
+		  <option value="2">02</option>
+		  <option value="3">03</option>
+		  <option value="4">04</option>
+		  <option value="5">05</option>
+		  <option value="6">06</option>
+		  <option value="7">07</option>
+		  <option value="8">08</option>
+		  <option value="9">09</option>
+		  <option value="10">10</option>
+		  <option value="11">11</option>
+		  <option value="12">12</option>
+		  <option value="13">13</option>
+		  <option value="14">14</option>
+		  <option value="15">15</option>
+		  <option value="16">16</option>
+		  <option value="17">17</option>
+		  <option value="18">18</option>
+		  <option value="19">19</option>
+		  <option value="20">20</option>
+		  <option value="21">21</option>
+		  <option value="22">22</option>      
+		  <option value="23">23</option>
+		  <option value="24">24</option>
+		  <option value="25">25</option>
+		  <option value="26">26</option>
+		  <option value="27">27</option>
+		  <option value="28">28</option>
+		  <option value="29">29</option>
+		  <option value="30">30</option>
+		  <option value="31">31</option>
+		  <option value="32">32</option>
+		  <option value="33">33</option>
+		  <option value="34">34</option>
+		  <option value="35">35</option>
+		  <option value="36">36</option>
+		  <option value="37">37</option>
+		  <option value="38">38</option>
+		  <option value="39">39</option>
+		  <option value="40">40</option>
+		  <option value="41">41</option>
+		  <option value="42">42</option>      
+		  <option value="43">43</option>
+		  <option value="44">44</option>
+		  <option value="45">45</option>
+		  <option value="46">46</option>
+		  <option value="47">47</option>
+		  <option value="48">48</option>
+		  <option value="49">49</option>
+		  <option value="50">50</option>
+		  <option value="51">51</option>
+		  <option value="52">52</option>      
+		  <option value="53">53</option>
+		  <option value="54">54</option>
+		  <option value="55">55</option>
+		  <option value="56">56</option>
+		  <option value="57">57</option>
+		  <option value="58">58</option>
+		  <option value="59">59</option>
+		</select>
+		<label>Minutes</label>
+	  </div>
+	  
+	  <div class="input-field col s4 white-text">
+		<select name="sec">
+          <option value="0" selected>00</option>
+		  <option value="1">01</option>
+		  <option value="2">02</option>
+		  <option value="3">03</option>
+		  <option value="4">04</option>
+		  <option value="5">05</option>
+		  <option value="6">06</option>
+		  <option value="7">07</option>
+		  <option value="8">08</option>
+		  <option value="9">09</option>
+		  <option value="10">10</option>
+		  <option value="11">11</option>
+		  <option value="12">12</option>
+		  <option value="13">13</option>
+		  <option value="14">14</option>
+		  <option value="15">15</option>
+		  <option value="16">16</option>
+		  <option value="17">17</option>
+		  <option value="18">18</option>
+		  <option value="19">19</option>
+		  <option value="20">20</option>
+		  <option value="21">21</option>
+		  <option value="22">22</option>      
+		  <option value="23">23</option>
+		  <option value="24">24</option>
+		  <option value="25">25</option>
+		  <option value="26">26</option>
+		  <option value="27">27</option>
+		  <option value="28">28</option>
+		  <option value="29">29</option>
+		  <option value="30">30</option>
+		  <option value="31">31</option>
+		  <option value="32">32</option>
+		  <option value="33">33</option>
+		  <option value="34">34</option>
+		  <option value="35">35</option>
+		  <option value="36">36</option>
+		  <option value="37">37</option>
+		  <option value="38">38</option>
+		  <option value="39">39</option>
+		  <option value="40">40</option>
+		  <option value="41">41</option>
+		  <option value="42">42</option>      
+		  <option value="43">43</option>
+		  <option value="44">44</option>
+		  <option value="45">45</option>
+		  <option value="46">46</option>
+		  <option value="47">47</option>
+		  <option value="48">48</option>
+		  <option value="49">49</option>
+		  <option value="50">50</option>
+		  <option value="51">51</option>
+		  <option value="52">52</option>      
+		  <option value="53">53</option>
+		  <option value="54">54</option>
+		  <option value="55">55</option>
+		  <option value="56">56</option>
+		  <option value="57">57</option>
+		  <option value="58">58</option>
+		  <option value="59">59</option>
+		</select>
+		<label>Seconds</label>
+	  </div>
+	  
+	</form>
+	</div>
+  
+	<div class="row">
+		<button class="btn large col s4 offset-s4 black" onclick="timer();">Set Timer
+		</button>
+	</div>
+  
+    <h3 class="white-text" align="center">Time Left</h3>
+	
+	<div class="circleBase type1 grey darken-3" style="margin-top: 40px;">
+		<div class="white-text row" style="margin-top:55px">
+			<h3 class="col s3" id="h2">00</h3>
+			<h3 class="col s1">:</h3>
+			<h3 class="col s3" id="m2">00</h3>
+			<h3 class="col s1">:</h3>
+			<h3 class="col s3" id="s2">00</h3>
+		</div>
+	</div>
+
+</div>
+
+<div class="col s12" id="timestamp">
+	<h3 class="white-text" align="center">Time</h3>
+	<div class="circleBase type1 grey darken-3" style="margin-top: 40px;">
+		<div class="white-text row" style="margin-top:55px">
+			<h3 class="col s3" id="h4">00</h3>
+			<h3 class="col s1">:</h3>
+			<h3 class="col s3" id="m4">00</h3>
+			<h3 class="col s1">:</h3>
+			<h3 class="col s3" id="s4">01</h3>
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+
+</body>
+</html>
